@@ -2241,3 +2241,80 @@ p { line-height: 1.64; }
 .hero__bottom a.round-link[href="#progetti"] {
   display: none !important;
 }
+
+/* V2.6.4 — prova mobile: CTA flottante premium al posto della barra fissa */
+@media (max-width: 700px) {
+  .mobile-action-bar {
+    position: fixed;
+    left: auto !important;
+    right: .95rem !important;
+    bottom: calc(.95rem + env(safe-area-inset-bottom)) !important;
+    z-index: 230;
+    width: auto;
+    display: inline-flex !important;
+    grid-template-columns: none !important;
+    gap: 0 !important;
+    padding: 0 !important;
+    border: 1px solid rgba(247,243,236,.24) !important;
+    border-radius: 999px;
+    color: var(--paper-2);
+    background: rgba(23,23,20,.78) !important;
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 1.1rem 2.8rem rgba(0,0,0,.24);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate3d(0, .72rem, 0) scale(.96);
+    transition:
+      opacity .34s var(--ease),
+      visibility .34s,
+      transform .34s var(--ease),
+      border-color .34s var(--ease),
+      background-color .34s var(--ease);
+  }
+
+  .mobile-action-bar.is-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  .mobile-action-bar a,
+  .mobile-action-bar a:last-child {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.8rem !important;
+    padding: 0 1.15rem !important;
+    border-radius: 999px;
+    color: var(--paper-2) !important;
+    background: transparent !important;
+    font-size: .64rem !important;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: .115em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .mobile-action-bar a::after {
+    content: "↗";
+    margin-left: .55rem;
+    font-size: .72rem;
+    line-height: 1;
+    transform: translateY(-.03rem);
+  }
+
+  body.menu-open .mobile-action-bar {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate3d(0, .72rem, 0) scale(.96);
+  }
+}
+
+@media (max-width: 700px) and (prefers-reduced-motion: reduce) {
+  .mobile-action-bar { transition: none !important; }
+}

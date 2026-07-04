@@ -34,6 +34,7 @@ document.documentElement.classList.remove('no-js'); document.documentElement.cla
   const parallaxItems = $$('[data-parallax]');
   const wordReveals = $$('.word-reveal');
   const dotLinks = $$('[data-dot-nav] a');
+  const mobileActionBar = $('[data-mobile-consultation]');
 
   function splitWords() {
     wordReveals.forEach((element) => {
@@ -167,6 +168,26 @@ document.documentElement.classList.remove('no-js'); document.documentElement.cla
     dotLinks.forEach((link) => link.classList.toggle('is-active', link === activeLink));
   }
 
+
+  function updateMobileActionBar() {
+    if (!mobileActionBar) return;
+    const isMobile = window.matchMedia('(max-width: 700px)').matches;
+    if (!isMobile) {
+      mobileActionBar.classList.remove('is-visible');
+      return;
+    }
+
+    const contact = $('#contatti');
+    const footer = $('.site-footer');
+    const contactTop = contact ? contact.getBoundingClientRect().top : Infinity;
+    const footerTop = footer ? footer.getBoundingClientRect().top : Infinity;
+    const nearFinalCta = Math.min(contactTop, footerTop) < state.vh * .72;
+    const afterIntro = state.y > state.vh * 1.15;
+    const menuOpen = document.body.classList.contains('menu-open');
+
+    mobileActionBar.classList.toggle('is-visible', afterIntro && !nearFinalCta && !menuOpen);
+  }
+
   function render() {
     state.y = window.scrollY;
     updateHeaderAndProgress();
@@ -176,6 +197,7 @@ document.documentElement.classList.remove('no-js'); document.documentElement.cla
     updateMethod();
     updateProjects();
     updateDotNav();
+    updateMobileActionBar();
     state.ticking = false;
   }
 
@@ -232,6 +254,7 @@ document.documentElement.classList.remove('no-js'); document.documentElement.cla
       toggle.setAttribute('aria-label', 'Apri menu');
       menu.classList.remove('is-open');
       document.body.classList.remove('menu-open');
+      updateMobileActionBar();
     };
 
     toggle.addEventListener('click', () => {
@@ -242,6 +265,7 @@ document.documentElement.classList.remove('no-js'); document.documentElement.cla
         toggle.setAttribute('aria-label', 'Chiudi menu');
         menu.classList.add('is-open');
         document.body.classList.add('menu-open');
+        updateMobileActionBar();
       }
     });
 
