@@ -1846,3 +1846,330 @@ p { line-height: 1.64; }
     grid-template-columns: 1fr;
   }
 }
+
+
+/* V2.6.1 — mobile menu fix: header libero, voci leggibili, scroll sicuro */
+@media (max-width: 720px) {
+  body.menu-open .site-header {
+    color: var(--paper-2);
+    background: transparent;
+    border-bottom-color: transparent;
+    backdrop-filter: none;
+  }
+
+  body.menu-open .site-header.is-scrolled {
+    color: var(--paper-2);
+    background: transparent;
+    border-bottom-color: transparent;
+    backdrop-filter: none;
+  }
+
+  body.menu-open .site-header .brand {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  body.menu-open .site-header .brand__logo {
+    filter: none;
+  }
+
+  .mobile-menu {
+    align-content: start;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 7.9rem 5vw 7rem;
+  }
+
+  .mobile-menu nav {
+    gap: .18rem;
+  }
+
+  .mobile-menu nav a {
+    padding: .68rem 0 .78rem;
+    font-size: clamp(2.7rem, 11.4vw, 4.7rem);
+    line-height: .95;
+    letter-spacing: -.055em;
+  }
+
+  .mobile-menu__footer {
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 430px) {
+  .mobile-menu {
+    padding-top: 7.45rem;
+    padding-bottom: 7.4rem;
+  }
+
+  .mobile-menu nav a {
+    padding: .62rem 0 .7rem;
+    font-size: clamp(2.45rem, 12vw, 3.85rem);
+    line-height: .96;
+  }
+}
+
+
+/* V2.6.2 — appunti mobile + Network refinement */
+
+/* Hero: dopo la rimozione del magnet link, il testo resta pulito e allineato */
+.hero__bottom {
+  justify-content: flex-start;
+}
+
+.hero__bottom > p {
+  max-width: 36rem;
+}
+
+@media (max-width: 700px) {
+  .hero__bottom {
+    display: block;
+  }
+
+  .hero__bottom > p {
+    width: 100%;
+    max-width: 34rem;
+  }
+}
+
+/* Network: CTA centrata davvero e accenti arancioni ridotti */
+.network {
+  background:
+    radial-gradient(circle at 78% 18%, rgba(247,243,236,.075), transparent 24rem),
+    radial-gradient(circle at 16% 82%, rgba(112,119,100,.14), transparent 28rem),
+    linear-gradient(180deg, #171714 0%, #10100e 55%, #171714 100%) !important;
+}
+
+.network__ring {
+  box-shadow: inset 0 0 3.2rem rgba(255,255,255,.028), 0 0 4rem rgba(247,243,236,.045) !important;
+}
+
+.network-card--project.is-active,
+.network-card--site.is-active,
+.network-card--bureau.is-active {
+  border-color: rgba(255,253,248,.46) !important;
+}
+
+.network-card.is-active,
+.network-card:hover,
+.network-card:focus-visible {
+  box-shadow: 0 2.4rem 5.4rem rgba(0,0,0,.30) !important;
+}
+
+.network__consult span,
+.network__panel > span {
+  color: rgba(255,253,248,.58) !important;
+}
+
+.network__consult .header-cta {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0 !important;
+  min-height: 3.35rem;
+  padding: .82rem 1.35rem !important;
+  line-height: 1.1 !important;
+  text-align: center !important;
+}
+
+.network__consult .header-cta span {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: auto !important;
+  margin: 0 !important;
+  line-height: 1.12 !important;
+  text-align: center !important;
+}
+
+.network__consult .header-cta:hover,
+.network__consult .header-cta:focus-visible {
+  color: var(--ink) !important;
+  background: var(--paper-2) !important;
+  border-color: var(--paper-2) !important;
+}
+
+@media (max-width: 720px) {
+  .network__consult .header-cta {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+}
+
+/* Perché mobile: da card-list a lista premium compatta */
+@media (max-width: 720px) {
+  .pillars .section-head {
+    margin-bottom: 2.15rem;
+  }
+
+  .pillars .section-head--split {
+    gap: 1.2rem;
+  }
+
+  .pillars .section-head__copy {
+    font-size: .94rem;
+    line-height: 1.62;
+  }
+
+  .pillars .bento {
+    display: grid;
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+    border-top: 1px solid rgba(23,23,20,.16);
+  }
+
+  .pillars .bento-card,
+  .pillars .bento-card--large,
+  .pillars .bento-card--image,
+  .pillars .bento-card--accent {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    min-height: auto !important;
+    padding: 1.05rem 0 !important;
+    border: 0 !important;
+    border-bottom: 1px solid rgba(23,23,20,.16) !important;
+    border-radius: 0 !important;
+    color: var(--ink) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  .pillars .bento-card:not(.bento-card--image) {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr);
+    gap: .15rem .85rem;
+    align-items: start;
+  }
+
+  .pillars .bento-card > span,
+  .pillars .bento-card--image div span {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    width: 2.25rem;
+    height: 2.25rem;
+    display: inline-grid;
+    place-items: center;
+    border: 1px solid rgba(23,23,20,.18);
+    border-radius: 999px;
+    color: rgba(23,23,20,.62) !important;
+    font-size: .62rem;
+    font-weight: 800;
+    letter-spacing: .08em;
+  }
+
+  .pillars .bento-card h3,
+  .pillars .bento-card--large h3,
+  .pillars .bento-card--image div h3 {
+    grid-column: 2;
+    margin: .05rem 0 .18rem !important;
+    color: var(--ink) !important;
+    font-size: clamp(1.14rem, 5.2vw, 1.55rem) !important;
+    line-height: 1.06 !important;
+    letter-spacing: -.035em;
+  }
+
+  .pillars .bento-card p,
+  .pillars .bento-card--accent p,
+  .pillars .bento-card--image div p {
+    grid-column: 2;
+    max-width: none !important;
+    margin: 0 !important;
+    color: rgba(23,23,20,.66) !important;
+    font-size: .9rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .pillars .bento-card--large svg,
+  .pillars .bento-card--image::after,
+  .pillars .bento-card--image img {
+    display: none !important;
+  }
+
+  .pillars .bento-card--image div {
+    position: static !important;
+    inset: auto !important;
+    display: grid !important;
+    grid-template-columns: 3rem minmax(0, 1fr);
+    gap: .15rem .85rem;
+    align-items: start;
+    color: var(--ink) !important;
+  }
+}
+
+/* Lavorazioni coordinate mobile: più compatta, tecnica e meno pesante */
+@media (max-width: 720px) {
+  .technical::after {
+    display: none !important;
+  }
+
+  .technical__layout {
+    gap: 2rem !important;
+  }
+
+  .technical__copy h2 {
+    font-size: clamp(2.9rem, 12vw, 4.6rem) !important;
+  }
+
+  .technical__copy p:not(.eyebrow) {
+    font-size: .94rem;
+    line-height: 1.62;
+  }
+
+  .technical__grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: .55rem !important;
+    border: 0 !important;
+  }
+
+  .technical__grid article {
+    min-height: auto !important;
+    padding: .88rem .95rem !important;
+    display: grid !important;
+    grid-template-columns: 2.1rem minmax(0, 1fr);
+    align-items: center;
+    gap: .78rem;
+    border: 1px solid rgba(255,255,255,.14) !important;
+    border-radius: 1rem;
+    background: rgba(255,255,255,.035);
+    transform: none !important;
+  }
+
+  .technical__grid article:hover {
+    background: rgba(255,255,255,.055);
+    transform: none !important;
+  }
+
+  .technical__grid span {
+    width: 2.1rem;
+    height: 2.1rem;
+    display: inline-grid;
+    place-items: center;
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 999px;
+    color: rgba(255,253,248,.58);
+    font-size: .57rem;
+    font-weight: 800;
+  }
+
+  .technical__grid strong {
+    max-width: none !important;
+    font-size: .96rem !important;
+    line-height: 1.24 !important;
+    letter-spacing: -.015em;
+  }
+}
+
+@media (max-width: 430px) {
+  .pillars .bento-card,
+  .pillars .bento-card--large,
+  .pillars .bento-card--image,
+  .pillars .bento-card--accent {
+    padding: .95rem 0 !important;
+  }
+
+  .technical__grid article {
+    padding: .82rem .86rem !important;
+  }
+}
