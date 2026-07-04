@@ -2173,3 +2173,71 @@ p { line-height: 1.64; }
     padding: .82rem .86rem !important;
   }
 }
+
+
+/* V2.6.3 — mobile menu compatto: tutte le voci visibili senza scroll nella maggior parte degli schermi */
+@media (max-width: 720px) {
+  .mobile-menu {
+    align-content: start;
+    padding: 6.85rem 5vw 5.8rem !important;
+    overflow-y: auto;
+  }
+
+  .mobile-menu nav {
+    gap: 0 !important;
+  }
+
+  .mobile-menu nav a {
+    padding: .42rem 0 .5rem !important;
+    font-size: clamp(2.05rem, 8.9vw, 3.45rem) !important;
+    line-height: .94 !important;
+    letter-spacing: -.05em;
+  }
+
+  .mobile-menu__footer {
+    margin-top: 1.35rem !important;
+    gap: 1rem;
+    font-size: .72rem;
+  }
+}
+
+@media (max-width: 430px) {
+  .mobile-menu {
+    padding-top: 6.45rem !important;
+    padding-bottom: 6.65rem !important;
+  }
+
+  .mobile-menu nav a {
+    padding: .36rem 0 .44rem !important;
+    font-size: clamp(1.9rem, 9.7vw, 2.82rem) !important;
+    line-height: .95 !important;
+  }
+
+  .mobile-menu__footer {
+    margin-top: 1.1rem !important;
+    font-size: .68rem;
+  }
+}
+
+@media (max-height: 720px) and (max-width: 720px) {
+  .mobile-menu {
+    padding-top: 5.95rem !important;
+    padding-bottom: 5.65rem !important;
+  }
+
+  .mobile-menu nav a {
+    padding: .3rem 0 .36rem !important;
+    font-size: clamp(1.72rem, 8.8vw, 2.55rem) !important;
+    line-height: .94 !important;
+  }
+
+  .mobile-menu__footer {
+    margin-top: .95rem !important;
+  }
+}
+
+/* Sicurezza: nasconde comunque il vecchio magnet link hero se una cache lo mantiene */
+.hero__bottom a[aria-label="Scopri i progetti"],
+.hero__bottom a.round-link[href="#progetti"] {
+  display: none !important;
+}
