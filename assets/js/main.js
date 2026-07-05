@@ -97,7 +97,7 @@ document.documentElement.classList.remove('no-js'); document.documentElement.cla
   function updateWordReveals() {
     wordReveals.forEach((element) => {
       const rect = element.getBoundingClientRect();
-      const p = clamp((state.vh * .94 - rect.top) / (state.vh * .42));
+      const p = clamp((state.vh * .88 - rect.top) / (state.vh * .52));
       const words = $$('.word', element);
       const count = Math.ceil(words.length * p);
       words.forEach((word, index) => word.classList.toggle('is-lit', index < count));
