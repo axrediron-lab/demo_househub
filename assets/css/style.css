@@ -2386,3 +2386,276 @@ body {
     text-overflow: ellipsis;
   }
 }
+
+
+/* V2.6.6 — refinements and new technical section */
+html, body { overflow-x: hidden; }
+body { overflow-x: hidden; }
+
+@media (max-width: 700px) {
+  .mobile-action-bar {
+    left: 50%;
+    right: auto;
+    bottom: 1rem;
+    width: min(calc(100% - 1.5rem), 22rem);
+    display: flex;
+    grid-template-columns: none;
+    gap: 0;
+    padding: .42rem;
+    transform: translate(-50%, 1.35rem);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .mobile-action-bar.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, 0);
+  }
+  .mobile-action-bar a {
+    width: 100%;
+    min-height: 2.95rem;
+    font-size: .68rem;
+    line-height: 1;
+  }
+  .site-footer { padding-bottom: 5rem; }
+}
+
+.network,
+.network__head,
+.network__head-grid,
+.network__map,
+.network__consult {
+  overflow-x: clip;
+}
+
+.network__head-grid > *,
+.network__consult > * {
+  min-width: 0;
+}
+
+.network__head h2 {
+  max-width: 100%;
+  text-wrap: balance;
+}
+
+.network__head-grid > p {
+  max-width: 100%;
+}
+
+.network__consult .header-cta,
+.network__consult .header-cta span {
+  color: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  letter-spacing: inherit !important;
+  text-transform: inherit !important;
+}
+
+.network__consult .header-cta:hover,
+.network__consult .header-cta:focus-visible {
+  color: var(--ink) !important;
+}
+
+@media (max-width: 720px) {
+  .network__head-grid { gap: 1.1rem; }
+  .network__head h2 {
+    font-size: clamp(2.9rem, 11.2vw, 4.5rem);
+    line-height: .92;
+    letter-spacing: -.045em;
+  }
+  .network__map {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 2.4rem;
+  }
+  .network__ring {
+    width: 100%;
+    max-width: 100%;
+    min-height: 19.5rem;
+  }
+  .network__panel {
+    width: calc(100% - 2rem);
+    max-width: calc(100% - 2rem);
+  }
+  .network__detail h3,
+  .network__detail ul,
+  .network__detail li {
+    max-width: 100%;
+  }
+  .network-card {
+    max-width: 100%;
+    width: 100%;
+  }
+  .network__consult {
+    gap: 1rem;
+  }
+  .network__consult .header-cta {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+}
+
+.technical {
+  background: linear-gradient(180deg, #161614 0%, #10100f 55%, #161614 100%);
+}
+
+.technical::before {
+  opacity: .07;
+  background-image: linear-gradient(90deg, transparent calc(25% - .5px), rgba(255,255,255,.38) 25%, transparent calc(25% + .5px)), linear-gradient(90deg, transparent calc(50% - .5px), rgba(255,255,255,.38) 50%, transparent calc(50% + .5px)), linear-gradient(90deg, transparent calc(75% - .5px), rgba(255,255,255,.38) 75%, transparent calc(75% + .5px));
+}
+
+.technical::after {
+  opacity: .18;
+  width: 20rem;
+  height: 20rem;
+  right: -6rem;
+  top: 10rem;
+  background: radial-gradient(circle, rgba(255,255,255,.22), transparent 70%);
+}
+
+.technical__layout--cards {
+  grid-template-columns: minmax(0, .76fr) minmax(0, 1.24fr);
+  gap: clamp(2.2rem, 5vw, 5.8rem);
+  align-items: start;
+}
+
+.technical__copy {
+  position: sticky;
+  top: 6.6rem;
+}
+
+.technical__copy p:not(.eyebrow) {
+  max-width: 31rem;
+  color: rgba(255,253,248,.72);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.technical__cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.technical-card {
+  position: relative;
+  min-height: 14.8rem;
+  padding: 1.15rem 1.1rem 1.25rem;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 1.6rem;
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.018));
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.015);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: .75rem;
+  transition: transform .35s var(--ease), border-color .35s var(--ease), background .35s var(--ease), box-shadow .35s var(--ease);
+  overflow: hidden;
+}
+
+.technical-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 82% 18%, rgba(255,255,255,.11), transparent 9rem);
+  opacity: 0;
+  transition: opacity .35s var(--ease);
+}
+
+.technical-card:hover,
+.technical-card:focus-within {
+  transform: translateY(-.28rem);
+  border-color: rgba(255,255,255,.26);
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025));
+  box-shadow: 0 1.6rem 3.2rem rgba(0,0,0,.18);
+}
+
+.technical-card:hover::before,
+.technical-card:focus-within::before { opacity: 1; }
+
+.technical-card__index,
+.technical-card__icon,
+.technical-card h3,
+.technical-card p {
+  position: relative;
+  z-index: 1;
+}
+
+.technical-card__index {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  color: rgba(255,255,255,.92);
+}
+
+.technical-card__index::after {
+  content: "";
+  width: 1.45rem;
+  height: 1px;
+  background: rgba(255,255,255,.7);
+}
+
+.technical-card__icon {
+  width: 2.85rem;
+  height: 2.85rem;
+  margin: .35rem 0 .15rem;
+  color: rgba(255,255,255,.96);
+}
+
+.technical-card__icon svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+  stroke-width: 1.55;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.technical-card h3 {
+  margin: 0;
+  font-size: 1.18rem;
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -.02em;
+}
+
+.technical-card p {
+  margin: 0;
+  color: rgba(255,255,255,.74);
+  font-size: .9rem;
+  line-height: 1.58;
+}
+
+@media (max-width: 1180px) {
+  .technical__layout--cards {
+    grid-template-columns: 1fr;
+    gap: 2.2rem;
+  }
+  .technical__copy { position: static; }
+  .technical__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 720px) {
+  .technical.section-pad { padding-block: 4.8rem; }
+  .technical__copy h2 {
+    font-size: clamp(3rem, 12vw, 5rem);
+    line-height: .96;
+  }
+  .technical__cards {
+    grid-template-columns: 1fr;
+    gap: .8rem;
+  }
+  .technical-card {
+    min-height: auto;
+    padding: 1.05rem 1rem 1.15rem;
+    border-radius: 1.3rem;
+    gap: .62rem;
+  }
+  .technical-card__icon { width: 2.5rem; height: 2.5rem; }
+  .technical-card h3 { font-size: 1.08rem; }
+  .technical-card p { font-size: .88rem; line-height: 1.52; }
+}
