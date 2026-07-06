@@ -1,8 +1,6 @@
 document.documentElement.classList.remove('no-js');
 document.documentElement.classList.add('js');
 
-document.documentElement.classList.remove('no-js'); document.documentElement.classList.add('js');
-
 (() => {
   'use strict';
 
@@ -11,6 +9,8 @@ document.documentElement.classList.remove('no-js'); document.documentElement.cla
   const clamp = (value, min = 0, max = 1) => Math.min(Math.max(value, min), max);
   const lerp = (a, b, n) => a + (b - a) * n;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const coarsePointer = window.matchMedia('(pointer: coarse)');
+  const mobileProjects = window.matchMedia('(max-width: 980px)');
 
   const state = {
     y: window.scrollY,
@@ -28,6 +28,7 @@ document.documentElement.classList.remove('no-js'); document.documentElement.cla
   const projectSection = $('[data-projects]');
   const projectTrack = $('[data-project-track]');
   const projectProgress = $('[data-project-progress]');
+  const projectAlbums = $$('[data-project-album]');
   const methodSteps = $$('.method-step');
   const methodImages = $$('.method__images img');
   const methodNumber = $('[data-method-number]');
@@ -76,12 +77,12 @@ document.documentElement.classList.remove('no-js'); document.documentElement.cla
   function updateHeaderAndProgress() {
     const maxScroll = Math.max(1, document.documentElement.scrollHeight - state.vh);
     const pageProgress = clamp(state.y / maxScroll);
-    progress.style.width = `${pageProgress * 100}%`;
-    header.classList.toggle('is-scrolled', state.y > 70);
+    if (progress) progress.style.width = `${pageProgress * 100}%`;
+    if (header) header.classList.toggle('is-scrolled', state.y > 70);
   }
 
   function updateHero() {
-    if (!hero || reducedMotion) return;
+    if (!hero || !heroMedia || heroLines.length < 3 || reducedMotion) return;
     const start = hero.offsetTop;
     const distance = Math.max(1, hero.offsetHeight - state.vh);
     const p = clamp((state.y - start) / distance);
@@ -142,7 +143,7 @@ document.documentElement.classList.remove('no-js'); document.documentElement.cla
     const start = projectSection.offsetTop;
     const distance = Math.max(1, projectSection.offsetHeight - state.vh);
     const p = clamp((state.y - start) / distance);
-    if (!window.matchMedia('(max-width: 980px)').matches) {
+    if (!mobileProjects.matches) {
       projectTrack.style.transform = `translate3d(${-state.projectDistance * p}px, 0, 0)`;
     } else {
       projectTrack.style.transform = 'none';
@@ -274,7 +275,7 @@ document.documentElement.classList.remove('no-js'); document.documentElement.cla
 
   function setupCursor() {
     const cursor = $('.cursor');
-    if (!cursor || matchMedia('(pointer: coarse)').matches) return;
+    if (!cursor || coarsePointer.matches) return;
     let tx = -100, ty = -100, x = -100, y = -100;
 
     window.addEventListener('mousemove', (event) => {
@@ -298,7 +299,7 @@ document.documentElement.classList.remove('no-js'); document.documentElement.cla
   }
 
   function setupMagnetic() {
-    if (matchMedia('(pointer: coarse)').matches || reducedMotion) return;
+    if (coarsePointer.matches || reducedMotion) return;
     $$('.magnetic').forEach((element) => {
       element.addEventListener('mousemove', (event) => {
         const rect = element.getBoundingClientRect();
@@ -311,17 +312,66 @@ document.documentElement.classList.remove('no-js'); document.documentElement.cla
   }
 
   function setupImageTilt() {
-    if (matchMedia('(pointer: coarse)').matches || reducedMotion) return;
+    if (coarsePointer.matches || reducedMotion) return;
     $$('.service-card, .project-card').forEach((card) => {
-      const image = $('img', card);
-      if (!image) return;
       card.addEventListener('mousemove', (event) => {
+        const image = $('.project-card__media img.is-active', card) || $('img', card);
+        if (!image) return;
         const rect = card.getBoundingClientRect();
         const x = (event.clientX - rect.left) / rect.width - .5;
         const y = (event.clientY - rect.top) / rect.height - .5;
         image.style.transform = `scale(1.055) translate3d(${x * -10}px, ${y * -10}px, 0)`;
       });
-      card.addEventListener('mouseleave', () => { image.style.transform = ''; });
+      card.addEventListener('mouseleave', () => {
+        $$('.project-card__media img, img', card).forEach((image) => { image.style.transform = ''; });
+      });
+    });
+  }
+
+  function setupProjectAlbums() {
+    projectAlbums.forEach((album) => {
+      const slides = $$('[data-project-slides] img', album);
+      const current = $('[data-project-current]', album);
+      const total = $('[data-project-total]', album);
+      const prev = $('[data-project-prev]', album);
+      const next = $('[data-project-next]', album);
+      let active = Math.max(0, slides.findIndex((slide) => slide.classList.contains('is-active')));
+      let touchStartX = 0;
+
+      if (!slides.length) return;
+      if (total) total.textContent = String(slides.length).padStart(2, '0');
+      album.classList.toggle('is-single', slides.length < 2);
+
+      const setSlide = (index) => {
+        active = (index + slides.length) % slides.length;
+        slides.forEach((slide, slideIndex) => {
+          slide.classList.toggle('is-active', slideIndex === active);
+        });
+        if (current) current.textContent = String(active + 1).padStart(2, '0');
+      };
+
+      prev?.addEventListener('click', () => setSlide(active - 1));
+      next?.addEventListener('click', () => setSlide(active + 1));
+      album.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          setSlide(active - 1);
+        }
+        if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          setSlide(active + 1);
+        }
+      });
+      album.addEventListener('touchstart', (event) => {
+        touchStartX = event.touches[0]?.clientX || 0;
+      }, { passive: true });
+      album.addEventListener('touchend', (event) => {
+        const touchEndX = event.changedTouches[0]?.clientX || touchStartX;
+        const delta = touchEndX - touchStartX;
+        if (Math.abs(delta) > 42) setSlide(active + (delta < 0 ? 1 : -1));
+      }, { passive: true });
+
+      setSlide(active);
     });
   }
 
@@ -341,7 +391,7 @@ document.documentElement.classList.remove('no-js'); document.documentElement.cla
       card.addEventListener('focus', () => setActive(key));
       card.addEventListener('click', () => setActive(key));
     });
-    if (!matchMedia('(pointer: coarse)').matches && !reducedMotion) {
+    if (!coarsePointer.matches && !reducedMotion) {
       section.addEventListener('mousemove', (event) => {
         const rect = section.getBoundingClientRect();
         section.style.setProperty('--mx', `${((event.clientX - rect.left) / rect.width) * 100}%`);
@@ -390,6 +440,7 @@ document.documentElement.classList.remove('no-js'); document.documentElement.cla
     setupCursor();
     setupMagnetic();
     setupImageTilt();
+    setupProjectAlbums();
     setupNetwork();
     setupForm();
     setupSmoothAnchors();

@@ -71,8 +71,6 @@
 <img alt="Cucina ristrutturata da House Hub" fetchpriority="high" src="assets/img/ui/hero-main.webp"/>
 </div>
 <div class="hero__veil"></div>
-<div aria-hidden="true" class="hero__grid"></div>
-<div aria-hidden="true" class="hero__watermark"></div>
 <div class="hero__content container">
 <p class="eyebrow hero__eyebrow">Ristrutturazioni all inclusive · Campania</p>
 <h1 class="hero__title">
@@ -84,7 +82,6 @@
 <p>Un unico team coordina l’intervento dall’analisi iniziale al risultato finale, con tempi, responsabilità e decisioni sempre chiari.</p>
 </div>
 </div>
-<div aria-hidden="true" class="hero__index"><span>01</span><b></b><span>10</span></div>
 </div>
 </section>
 <section class="manifesto section-pad" data-reveal-section="" id="visione">
@@ -279,40 +276,47 @@
 </div>
 <div class="projects__viewport">
 <div class="projects__track" data-project-track="">
-<article class="project-card cursor-view">
-<div class="project-card__media"><img alt="Casa MT, cucina" src="assets/img/ui/hero-main.webp"/></div>
+<article class="project-card project-card--album cursor-view" data-project-album="">
+<div class="project-card__media" data-project-slides="">
+<img alt="Casa MT, cucina" class="is-active" src="assets/img/ui/hero-main.webp"/>
+<img alt="Casa MT, camera" decoding="async" loading="lazy" src="assets/img/progetti/progetto-02-materia-e-luce.webp"/>
+</div>
+<div aria-label="Sfoglia album Casa MT" class="project-card__controls">
+<button aria-label="Immagine precedente Casa MT" data-project-prev="" type="button">&lsaquo;</button>
+<button aria-label="Immagine successiva Casa MT" data-project-next="" type="button">&rsaquo;</button>
+</div>
+<div aria-live="polite" class="project-card__count"><span data-project-current="">01</span><span>/</span><span data-project-total="">02</span></div>
 <div class="project-card__meta">
 <span>01</span>
 <h3>Casa MT</h3>
 <p>130 m² · Nocera Superiore</p>
 </div>
 </article>
-<article class="project-card project-card--portrait cursor-view">
-<div class="project-card__media"><img alt="Casa MT, camera" src="assets/img/progetti/progetto-02-materia-e-luce.webp"/></div>
-<div class="project-card__meta">
-<span>Dettaglio</span>
-<h3>Materia &amp; luce</h3>
-<p>Geometrie, verde salvia e laterizio</p>
+<article class="project-card project-card--album cursor-view" data-project-album="">
+<div class="project-card__media" data-project-slides="">
+<img alt="Casa BP, cucina e dining" class="is-active" decoding="async" loading="lazy" src="assets/img/progetti/progetto-03-casa-bp.webp"/>
+<img alt="Casa BP, dettaglio cucina" decoding="async" loading="lazy" src="assets/img/progetti/progetto-04-segni-grafici.webp"/>
 </div>
-</article>
-<article class="project-card cursor-view">
-<div class="project-card__media"><img alt="Casa BP, cucina e dining" src="assets/img/progetti/progetto-03-casa-bp.webp"/></div>
+<div aria-label="Sfoglia album Casa BP" class="project-card__controls">
+<button aria-label="Immagine precedente Casa BP" data-project-prev="" type="button">&lsaquo;</button>
+<button aria-label="Immagine successiva Casa BP" data-project-next="" type="button">&rsaquo;</button>
+</div>
+<div aria-live="polite" class="project-card__count"><span data-project-current="">01</span><span>/</span><span data-project-total="">02</span></div>
 <div class="project-card__meta">
 <span>02</span>
 <h3>Casa BP</h3>
 <p>140 m² · Nocera Superiore</p>
 </div>
 </article>
-<article class="project-card project-card--portrait cursor-view">
-<div class="project-card__media"><img alt="Casa BP, dettaglio cucina" src="assets/img/progetti/progetto-04-segni-grafici.webp"/></div>
-<div class="project-card__meta">
-<span>Dettaglio</span>
-<h3>Segni grafici</h3>
-<p>Finiture essenziali e contrasti netti</p>
+<article class="project-card project-card--album cursor-view" data-project-album="">
+<div class="project-card__media" data-project-slides="">
+<img alt="Casa CS, living e dining" class="is-active" decoding="async" loading="lazy" src="assets/img/progetti/progetto-05-casa-cs.webp"/>
 </div>
-</article>
-<article class="project-card cursor-view">
-<div class="project-card__media"><img alt="Casa CS, living e dining" src="assets/img/progetti/progetto-05-casa-cs.webp"/></div>
+<div aria-label="Sfoglia album Casa CS" class="project-card__controls">
+<button aria-label="Immagine precedente Casa CS" data-project-prev="" type="button">&lsaquo;</button>
+<button aria-label="Immagine successiva Casa CS" data-project-next="" type="button">&rsaquo;</button>
+</div>
+<div aria-live="polite" class="project-card__count"><span data-project-current="">01</span><span>/</span><span data-project-total="">01</span></div>
 <div class="project-card__meta">
 <span>03</span>
 <h3>Casa CS</h3>
