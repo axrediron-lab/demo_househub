@@ -2045,80 +2045,12 @@ p { line-height: 1.64; }
   }
 }
 
-/* Lavorazioni coordinate mobile: più compatta, tecnica e meno pesante */
-@media (max-width: 720px) {
-  .technical::after {
-    display: none !important;
-  }
-
-  .technical__layout {
-    gap: 2rem !important;
-  }
-
-  .technical__copy h2 {
-    font-size: clamp(2.9rem, 12vw, 4.6rem) !important;
-  }
-
-  .technical__copy p:not(.eyebrow) {
-    font-size: .94rem;
-    line-height: 1.62;
-  }
-
-  .technical__grid {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: .55rem !important;
-    border: 0 !important;
-  }
-
-  .technical__grid article {
-    min-height: auto !important;
-    padding: .88rem .95rem !important;
-    display: grid !important;
-    grid-template-columns: 2.1rem minmax(0, 1fr);
-    align-items: center;
-    gap: .78rem;
-    border: 1px solid rgba(255,255,255,.14) !important;
-    border-radius: 1rem;
-    background: rgba(255,255,255,.035);
-    transform: none !important;
-  }
-
-  .technical__grid article:hover {
-    background: rgba(255,255,255,.055);
-    transform: none !important;
-  }
-
-  .technical__grid span {
-    width: 2.1rem;
-    height: 2.1rem;
-    display: inline-grid;
-    place-items: center;
-    border: 1px solid rgba(255,255,255,.16);
-    border-radius: 999px;
-    color: rgba(255,253,248,.58);
-    font-size: .57rem;
-    font-weight: 800;
-  }
-
-  .technical__grid strong {
-    max-width: none !important;
-    font-size: .96rem !important;
-    line-height: 1.24 !important;
-    letter-spacing: -.015em;
-  }
-}
-
 @media (max-width: 430px) {
   .pillars .bento-card,
   .pillars .bento-card--large,
   .pillars .bento-card--image,
   .pillars .bento-card--accent {
     padding: .95rem 0 !important;
-  }
-
-  .technical__grid article {
-    padding: .82rem .86rem !important;
   }
 }
 
@@ -2332,16 +2264,14 @@ body {
   color: var(--ink) !important;
 }
 
-/* V2.6.6 clean — Lavorazioni coordinate, versione caratteristica ma coerente */
+/* Lavorazioni coordinate */
 .technical--services {
-  background:
-    radial-gradient(circle at 86% 18%, rgba(255,253,248,.055), transparent 28rem),
-    linear-gradient(180deg, #171714 0%, #10100e 58%, #171714 100%);
+  background: #151512;
 }
 
+.technical--services::before,
 .technical--services::after {
-  opacity: .24;
-  background: radial-gradient(circle, rgba(255,253,248,.18), transparent 68%);
+  display: none;
 }
 
 .technical--services .technical__layout {
@@ -2362,90 +2292,67 @@ body {
 
 .technical__grid--services .technical-service {
   position: relative;
-  min-height: 10rem;
-  padding: 1.25rem 1.25rem 1.2rem 4.75rem;
+  min-height: 9.4rem;
+  padding: 1.45rem 1.4rem;
   border-top: 1px solid rgba(255,255,255,.14);
   background: transparent;
   display: grid;
+  grid-template-columns: 2.75rem minmax(0, 1fr);
+  grid-template-rows: auto auto;
   align-content: center;
-  gap: .46rem;
-  overflow: hidden;
-  transition: background-color .35s var(--ease), transform .35s var(--ease);
+  column-gap: 1.05rem;
+  row-gap: .42rem;
+  transition: background-color .3s var(--ease);
 }
 
 .technical__grid--services .technical-service:nth-child(odd) {
   border-right: 1px solid rgba(255,255,255,.12);
 }
 
-.technical__grid--services .technical-service::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(255,255,255,.055), transparent 72%);
-  opacity: 0;
-  transition: opacity .35s var(--ease);
-  pointer-events: none;
+.technical__grid--services .technical-service:nth-last-child(-n + 2) {
+  border-bottom: 1px solid rgba(255,255,255,.14);
 }
 
 .technical__grid--services .technical-service:hover {
-  transform: translateX(.18rem);
-  background: rgba(255,255,255,.035);
-}
-
-.technical__grid--services .technical-service:hover::before {
-  opacity: 1;
+  transform: none;
+  background: rgba(255,255,255,.04);
 }
 
 .technical-service__number,
-.technical-service__icon,
 .technical__grid--services strong,
 .technical__grid--services em {
-  position: relative;
-  z-index: 1;
+  min-width: 0;
 }
 
-.technical-service__number {
-  position: absolute;
-  left: 1.25rem;
-  top: 1.35rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+.technical__grid--services .technical-service__number {
+  position: static;
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  align-self: start;
   width: auto;
   height: auto;
+  padding-top: .18rem;
   border: 0;
   border-radius: 0;
-  color: rgba(255,253,248,.44);
-  font-size: .68rem;
+  color: var(--clay);
+  font-size: .66rem;
   font-weight: 600;
-  letter-spacing: .12em;
-}
-
-.technical-service__number::after {
-  content: "";
-  position: absolute;
-  left: 2.2rem;
-  top: .48rem;
-  width: 1.25rem;
-  height: 1px;
-  background: rgba(255,253,248,.24);
-}
-
-.technical-service__icon {
-  display: none;
+  letter-spacing: .08em;
 }
 
 .technical__grid--services strong {
-  max-width: 18rem;
+  grid-column: 2;
+  grid-row: 1;
+  max-width: 22rem;
   font-size: clamp(1rem, 1.2vw, 1.28rem);
-  line-height: 1.12;
+  line-height: 1.2;
   font-weight: 600;
-  letter-spacing: .01em;
-  text-transform: uppercase;
+  letter-spacing: 0;
 }
 
 .technical__grid--services em {
-  display: block;
+  grid-column: 2;
+  grid-row: 2;
   max-width: 21rem;
   color: rgba(255,253,248,.68);
   font-style: normal;
@@ -2468,48 +2375,62 @@ body {
 }
 
 @media (max-width: 720px) {
+  .technical--services .technical__layout {
+    gap: 2.4rem;
+  }
+
+  .technical--services .technical__copy h2 {
+    font-size: 3rem;
+    line-height: .98;
+  }
+
+  .technical--services .technical__copy p:not(.eyebrow) {
+    font-size: .94rem;
+    line-height: 1.62;
+  }
+
   .technical__grid--services {
     grid-template-columns: 1fr !important;
-    gap: 0 !important;
-    border: 0 !important;
   }
 
   .technical__grid--services .technical-service {
-    min-height: auto !important;
-    padding: 1.05rem 0 1.1rem 3.35rem !important;
-    display: grid !important;
-    grid-template-columns: 1fr;
-    align-items: start;
-    gap: .34rem;
+    min-height: 0 !important;
+    padding: 1.05rem 0 !important;
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+    column-gap: .8rem;
+    row-gap: .3rem;
     border-right: 0 !important;
     border-radius: 0;
-    transform: none !important;
   }
 
-  .technical-service__number {
-    left: 0;
-    top: 1.14rem;
+  .technical__grid--services .technical-service:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+
+  .technical__grid--services .technical-service:last-child {
+    border-bottom: 1px solid rgba(255,255,255,.14);
+  }
+
+  .technical__grid--services .technical-service__number {
+    padding-top: .16rem;
     font-size: .62rem;
-  }
-
-  .technical-service__number::after {
-    left: 1.75rem;
-    width: .9rem;
-  }
-
-  .technical-service__icon {
-    display: none !important;
   }
 
   .technical__grid--services strong {
     max-width: none;
-    font-size: .96rem !important;
-    line-height: 1.18 !important;
+    font-size: 1rem !important;
+    line-height: 1.22 !important;
   }
 
   .technical__grid--services em {
     max-width: none;
     font-size: .84rem;
     line-height: 1.45;
+  }
+}
+
+@media (max-width: 430px) {
+  .technical--services .technical__copy h2 {
+    font-size: 2.6rem;
   }
 }
